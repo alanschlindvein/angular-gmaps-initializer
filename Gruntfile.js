@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 				footer: '})(window, window.angular);'
 			},
 			dist: {
-				src: ['src/angular-communicator.js'],
+				src: ['src/*.js'],
 				dest: '<%= dirs.dest %>/<%= pkg.name %>.js'
 			}
 		},

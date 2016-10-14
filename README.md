@@ -12,3 +12,78 @@ An Angular module to initialize google maps.
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/angular-gmaps-initializer.svg?style=flat-square
 [downloads-url]: https://npmjs.org/package/angular-gmaps-initializer
+
+It injects an Angular Factory to initialize [Google Maps API](https://developers.google.com/maps).
+
+## Table of contents:
+- [Get Sarted](#getstarted)
+- [Usage](#usage)
+ - [init](#init)
+ - [mapsInitialized](#mapsInitialized)
+
+## Get Sarted
+**(1)** You can install angular-communicator using 3 different ways:<br/>
+**Git:**
+clone & build [this](https://github.com/alanschlindvein/angular-communicator.git) repository<br/>
+**Bower:**
+```bash
+$ bower install angular-gmaps-initializer --save
+```
+**npm:**
+```bash
+$ npm install angular-gmaps-initializer
+```
+**(2)** Include `angular-gmaps-initializer.js` (or `angular-gmaps-initializer.min.js`) from the [dist](https://github.com/alanschlindvein/angular-gmaps-initializer/tree/master/dist) directory in your `index.html`, after including Angular itself.
+
+**(3)** Add `'AngularGmapsInitializer'` to your main module's list of dependencies.
+
+When you're done, your setup should look similar to the following:
+
+```html
+<!doctype html>
+<html ng-app="myApp">
+<head>
+
+</head>
+<body>
+    ...
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="bower_components/js/angular-gmaps-initializer.min.js"></script>
+    ...
+    <script>
+        var myApp = angular.module('myApp', ['AngularGmapsInitializer']);
+
+    </script>
+    ...
+</body>
+</html>
+```
+
+## Usage
+## init
+You specify additional parameter to load within the bootstrap request by specifying an array to init function.
+
+```js
+myApp.controller('MainCtrl', function($scope, angularGmapsInitializer) {
+  angularGmapsInitializer.init([
+    {key: 'libraries', value: 'visualization, places'},
+    {key: 'language', value: 'en'},
+    {key: 'key', value: 'YOUR_API_KEY'}
+  ]);
+});
+```
+
+This will create a url like `https://maps.googleapis.com/maps/api/js?v=3?libraries=visualization, places&language=en&key=YOUR_API_KEY"`
+
+## mapsInitialized
+
+```js
+myApp.controller('MainCtrl', function($scope, angularGmapsInitializer) {
+  angularGmapsInitializer.mapsInitialized.then(function() {
+    //your sucess code
+  }, function(err) {
+    //your error code
+  });
+});
+```
+
