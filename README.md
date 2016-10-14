@@ -76,4 +76,4 @@ myApp.controller('MainCtrl', function($scope, angularGmapsInitializer) {
 });
 ```
 
-This will create a url like `https://maps.googleapis.com/maps/api/js?v=3?libraries=visualization, places&language=en&key=YOUR_API_KEY"`
+This will create a url like `https://maps.googleapis.com/maps/api/js?v=3&libraries=visualization, places&language=en&key=YOUR_API_KEY"`
