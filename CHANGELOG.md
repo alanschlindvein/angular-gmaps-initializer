@@ -1,3 +1,9 @@
+<a name="0.3.0"></a>
+# 0.3.0 Carnivorous Duck (14/10/2016)
+
+###Features
+* **Unified api
+
 <a name="0.2.0"></a>
 # 0.2.0 Toothless Great White Shark (14/10/2016)
 

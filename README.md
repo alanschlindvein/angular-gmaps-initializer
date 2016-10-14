@@ -18,8 +18,6 @@ It injects an Angular Factory to initialize [Google Maps API](https://developers
 ## Table of contents:
 - [Get Sarted](#getstarted)
 - [Usage](#usage)
- - [init](#init)
- - [mapsInitialized](#mapsInitialized)
 
 ## Get Sarted
 **(1)** You can install angular-communicator using 3 different ways:<br/>
@@ -60,30 +58,22 @@ When you're done, your setup should look similar to the following:
 ```
 
 ## Usage
-## init
-You specify additional parameter to load within the bootstrap request by specifying an array to init function.
+You specify additional parameter to load within the bootstrap request by specifying an object and passing it to initialize. The initialize returns a promise for the map initialization.
 
 ```js
 myApp.controller('MainCtrl', function($scope, angularGmapsInitializer) {
-  angularGmapsInitializer.init([
-    {key: 'libraries', value: 'visualization, places'},
-    {key: 'language', value: 'en'},
-    {key: 'key', value: 'YOUR_API_KEY'}
-  ]);
+  var options = {
+    libraries: 'visualization, places',
+    language: 'en',
+    key: 'YOUR_API_KEY'
+  };
+  
+  angularGmapsInitializer.initialize(options).then(function() {
+        //your sucess code
+      }, function(err) {
+        //your error code
+      });
 });
 ```
 
 This will create a url like `https://maps.googleapis.com/maps/api/js?v=3?libraries=visualization, places&language=en&key=YOUR_API_KEY"`
-
-## mapsInitialized
-
-```js
-myApp.controller('MainCtrl', function($scope, angularGmapsInitializer) {
-  angularGmapsInitializer.mapsInitialized.then(function() {
-    //your sucess code
-  }, function(err) {
-    //your error code
-  });
-});
-```
-

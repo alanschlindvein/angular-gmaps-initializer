@@ -4,7 +4,7 @@
     "authors": [
         "alanschlindvein <alansaraujo.schlindvein@gmail.com>"
     ],
-    "description": "An Angular module that gives you a way to share messages among modules",
+    "description": "An Angular module to initialize google maps",
     "main": "./dist/angular-gmaps-initializer.js",
     "keywords": [
         "AngularJS",
