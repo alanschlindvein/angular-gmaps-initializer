@@ -1,3 +1,9 @@
+<a name="0.3.1"></a>
+# 0.3.1 Dangerous Little Rabbit (18/10/2016)
+
+###Bug Fixes
+* **Fixed bug for maps ready initialized 
+
 <a name="0.3.0"></a>
 # 0.3.0 Carnivorous Duck (14/10/2016)
 

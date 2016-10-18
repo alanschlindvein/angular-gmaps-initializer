@@ -1,6 +1,6 @@
 /**
  * An Angular module to initialize google maps.
- * @version v0.3.0 - 2016-10-14
+ * @version v0.3.1 - 2016-10-18
  * @link https://github.com/alanschlindvein/angular-gmaps-initializer
  * @author alanschlindvein <alansaraujo.schlindvein@gmail.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -20,18 +20,20 @@ function angularGmapsInitializer($window, $q) {
     document.body.appendChild(script);
     initialized = true;
   }
+  
+  function configureMap(config) {
+  var url = '', keys = Object.keys(config);
+	keys.forEach(function(key) {
+		url += '&' + key + '=' + config[key];
+	});
+	addMapUrlToBody(url);
+  }
 
   return {
     initialize: function(config) {
       var mapsDefer = $q.defer();
       $window.googleMapsInitialized = mapsDefer.resolve;
-      if(!initialized) {
-        var url = '', keys = Object.keys(config);
-        keys.forEach(function(key) {
-          url += '&' + key + '=' + config[key]
-        });
-        addMapUrlToBody(url);
-      }
+      (initialized) ? mapsDefer.resolve() : configureMap(config);
       return mapsDefer.promise
     }
   };
