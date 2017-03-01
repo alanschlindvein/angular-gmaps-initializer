@@ -1,41 +1,58 @@
 /**
  * An Angular module to initialize google maps.
- * @version v0.3.1 - 2016-10-18
+ * @version v0.4.0 - 2017-03-01
  * @link https://github.com/alanschlindvein/angular-gmaps-initializer
  * @author alanschlindvein <alansaraujo.schlindvein@gmail.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
-(function (window, angular) {
-angular
-  .module('AngularGmapsInitializer', [])
-  .factory('angularGmapsInitializer', angularGmapsInitializer);
-
-angularGmapsInitializer.$inject = ['$window', '$q'];
-function angularGmapsInitializer($window, $q) {
-  var baseUrl = 'https://maps.googleapis.com/maps/api/js?v=3', initialized = false;
-
-  function addMapUrlToBody(url) {
-    var script = document.createElement('script');
-    script.src = baseUrl + url + '&callback=googleMapsInitialized';
-    document.body.appendChild(script);
-    initialized = true;
-  }
-  
-  function configureMap(config) {
-  var url = '', keys = Object.keys(config);
-	keys.forEach(function(key) {
-		url += '&' + key + '=' + config[key];
-	});
-	addMapUrlToBody(url);
-  }
-
-  return {
-    initialize: function(config) {
-      var mapsDefer = $q.defer();
-      $window.googleMapsInitialized = mapsDefer.resolve;
-      (initialized) ? mapsDefer.resolve() : configureMap(config);
-      return mapsDefer.promise
+(function(factory) {
+  'use strict';
+  if (typeof exports === 'object') {
+    // Node/CommonJS
+    module.exports = factory(typeof angular !== 'undefined' ? angular : require('angular'));
+  } else if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['angular'], factory);
+  } else {
+    // Browser globals
+    if (typeof angular === 'undefined') {
+      throw new Error('AngularJS framework needs to be included, see https://angularjs.org/');
     }
-  };
-}
-})(window, window.angular);
+    factory(angular);
+  }
+}(function(angular) {
+  'use strict';
+
+  return angular
+    .module('AngularGmapsInitializer', [])
+    .factory('angularGmapsInitializer', ['$window', '$q', angularGmapsInitializer]);
+
+  function angularGmapsInitializer($window, $q) {
+    var baseUrl = 'https://maps.googleapis.com/maps/api/js?v=3', initialized = false;
+
+    function addMapUrlToBody(url) {
+      var script = document.createElement('script');
+      script.src = baseUrl + url + '&callback=googleMapsInitialized';
+      document.body.appendChild(script);
+      initialized = true;
+    }
+
+    function configureMap(config) {
+      var url = '', keys = Object.keys(config);
+      keys.forEach(function(key) {
+        url += '&' + key + '=' + config[key];
+      });
+      addMapUrlToBody(url);
+    }
+
+    return {
+      initialize: function(config) {
+        var mapsDefer = $q.defer();
+        $window.googleMapsInitialized = mapsDefer.resolve;
+        (initialized) ? mapsDefer.resolve() : configureMap(config);
+        return mapsDefer.promise;
+      }
+    };
+  }
+}));
+

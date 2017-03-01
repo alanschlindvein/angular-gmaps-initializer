@@ -20,9 +20,7 @@ module.exports = function(grunt) {
 		dirs: { dest: 'dist' },
 		concat: {
 			options: {
-				banner: '<%= meta.banner %>' + '\n' +
-				'(function (window, angular) {\n',
-				footer: '})(window, window.angular);'
+				banner: '<%= meta.banner %>' + '\n'
 			},
 			dist: {
 				src: ['src/*.js'],

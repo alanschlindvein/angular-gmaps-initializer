@@ -1,3 +1,6 @@
+<a name="0.4.0"></a>
+# 0.4.0 Cute Demon Snake (01/03/2016)
+
 <a name="0.3.1"></a>
 # 0.3.1 Dangerous Little Rabbit (18/10/2016)
 
